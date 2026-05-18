@@ -6,7 +6,7 @@ import json
 import shutil
 
 
-# upstream default config. DO NOT MODIFY UNDER ANY CIRCUMSTANCES, write to /usr/share/aim/defaults.json instead
+# upstream default config. DO NOT MODIFY, write to /usr/share/aim/defaults.json instead
 upstream_default = {
     ""
 }
