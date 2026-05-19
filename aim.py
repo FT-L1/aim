@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+# I would also like to mention, that the only reason this file is named "aim.py" 
+# is because VS Code Syntax highlighting wouldn't work otherwise
+# some day later on I'll remove the .py extension
 import requests
 import os
 import argparse
@@ -45,7 +49,8 @@ if os.path.isfile(config):
 
 
 # check whether we are root and alter the paths if so
-#if you are a distributor, make sure these directories exist
+
+# if you are a distributor, make sure these directories exist
 is_root = os.getuid() == 0
 
 if is_root == True:
@@ -80,7 +85,31 @@ print(arguments.package)
 
 
 if arguments.action == "install":
+    print(f"Attempting to find {arguments.action}")
+elif arguments.action == "remove":
+    print(f"removing {arguments.package}")
     
+    if os.path.isfile(f"{imagedir}/{arguments.package}.Appimage"):
+        os.remove(f"{imagedir}/{arguments.package}.Appimage")
+    else:
+        print("WARNING: no such app in Appimage directory")
+    
+    if os.path.isfile(f"{desktopdir}/{arguments.package}.desktop"):
+        os.remove(f"{desktopdir}/{arguments.package}-aim.desktop")
+    else:
+        print("WARNING: no such desktop entry in xdg desktop entry directory")
+
+    if os.path.isfile(f"{icondir}/placeholdertest.svg"):     # note to self: remember to actually point to some icon path or name
+        os.remove(f"{icondir}/placeholdertest.svg")
+    else:
+        print("WARNING: no such icon")
+
+    if os.path.isfile(f"{infodir}/{arguments.package}.json"):
+        os.remove(f"{infodir}/{arguments.package}.json")
+    else:
+        print("WARNING: no such info file")
+
+    print(f"removed {arguments.package}")
 
 
 
@@ -127,20 +156,10 @@ if arguments.action == "install":
 
 
 
+# for reference, this is just the test I used for networking, will reuse this code soon enough
 
 
-
-
-
-
-
-
-
-
-
-
-
-# url = "https://ocs-dl.fra1.cdn.digitaloceanspaces.com/data/files/1741562446/Luanti-5.15.0.AppImage?response-content-disposition=attachment%3B%2520Luanti-5.15.0.AppImage&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=RWJAQUNCHT7V2NCLZ2AL%2F20260424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260424T165757Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6ff441d4015db018ad77cc63e296558f23e99a0cbeb598d4197e7f81f436b179"
+# url = "example.com"
 
 # response = requests.get(url)
 
