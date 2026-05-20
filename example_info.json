@@ -1,7 +1,11 @@
 
 {
-    "Version" : "0.0.0",
-    "Release" : "1",
-    "Description" : "whatever"
-    
+    "version" : "0.0.0",
+    "release" : "1",
+    "description" : "whatever",
+    "installedRoot" : false,
+    "repos" : 
+    {
+        "repo1" : "http://repo1.org/"
+    }
 }

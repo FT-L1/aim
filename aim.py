@@ -12,14 +12,14 @@ import shutil
 
 # upstream default config. DO NOT MODIFY, write to /usr/share/aim/defaults.json instead
 upstream_default = {
-    ""
+    "coreRepoEnabled" : True
 }
 # global variables, such as the directory to install to and so on (per user)
 username = os.environ.get("USER")
 
 imagedir = f"/home/{username}/.local/share/aim/Appimages/" 
 desktopdir = f"/home/{username}/.local/share/applications/"
-icondir = f"/home/{username}/.local/share/icons/hicolor/scalable/apps"
+icondir = f"/home/{username}/.local/share/icons/hicolor/scalable/apps/"
 infodir = f"/home/{username}/.local/share/aim/info/"
 config = f"/home/{username}/.config/aim.json"
 defaultconfig = "/usr/share/aim/defaults.json"
@@ -63,9 +63,28 @@ if is_root == True:
 else:
     print(f"running as normal user, operating for user {username} only")
 
+
+# function for checking whether a file even exists
+def fileExists(url):
+    try:
+        response = requests.head(url) # remember to put a timeout option here!!
+
+        return response.status_code == 200
+    except requests.RequestException:
+        return False
+    
+# function for fetching a file
+def fetchFile(url, destination):
+    response = requests.get(url)
+
+    with open(f"{destination}{arguments.package}.Appimage", "wb"):
+        for chunk in response.iter_content(chunk_size=4096):
+            file.write(chunk)
+
+
 # the url with the repo, hopefully this will be more decentralized soon
 
-url = "http://192.168.178.46"
+url = "http://192.168.178.46/"
 
 
 
@@ -86,6 +105,7 @@ print(arguments.package)
 
 if arguments.action == "install":
     print(f"Attempting to find {arguments.action}")
+
 elif arguments.action == "remove":
     print(f"removing {arguments.package}")
     
@@ -110,62 +130,9 @@ elif arguments.action == "remove":
         print("WARNING: no such info file")
 
     print(f"removed {arguments.package}")
+elif arguments.action == "fetch":
+    print(f"attempting to download {arguments.package} into working directory")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# for reference, this is just the test I used for networking, will reuse this code soon enough
-
-
-# url = "example.com"
-
-# response = requests.get(url)
-
-
-# with open("lunati.Appimage", "wb") as file:
-#     file.write(response.content)
- 
-# print("random game is here!")
+    if fileExists(f"{url}Appimages/{arguments.package}.Appimage"):     # make sure to actually add custom repositories here aswell
+        fetchFile(f"{url}", os.getcwd())
 
