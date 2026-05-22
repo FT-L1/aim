@@ -135,4 +135,6 @@ elif arguments.action == "fetch":
 
     if fileExists(f"{url}Appimages/{arguments.package}.Appimage"):     # make sure to actually add custom repositories here aswell
         fetchFile(f"{url}", os.getcwd())
+    else:
+        print("ERROR: file does not exist or server/network down")
 
