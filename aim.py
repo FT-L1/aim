@@ -9,13 +9,19 @@ import argparse
 import json
 import shutil
 
+# grabbing the username
+username = os.environ.get("USER")
 
 # upstream default config. DO NOT MODIFY, write to /usr/share/aim/defaults.json instead
 upstream_default = {
-    "coreRepoEnabled" : True
+    "coreRepoEnabled" : True,
+    "imagedirDir" : f"/home/{username}/.local/share/aim/Appimages/",
+    "imageDirRoot" : "/var/lib/aim/Appimages/",
+    "configPath" : f"/home/{username}/.config/aim.json",
+    "configPathRoot" : "/etc/aim.json"
+    
 }
 # global variables, such as the directory to install to and so on (per user)
-username = os.environ.get("USER")
 
 imagedir = f"/home/{username}/.local/share/aim/Appimages/" 
 desktopdir = f"/home/{username}/.local/share/applications/"
@@ -32,6 +38,7 @@ if not os.path.exists(imagedir):
     os.makedirs(imagedir)
 
 if not os.path.exists(infodir):
+    print("WARNING: info directory doesn't exist, creating..")
     os.makedirs(infodir)
 
 if os.path.isfile(config):
@@ -84,7 +91,7 @@ def fetchFile(url, destination):
 
 # the url with the repo, hopefully this will be more decentralized soon
 
-url = "http://192.168.178.46/"
+url = "http://192.168.178.46/" # local ip of my laptop
 
 
 

@@ -3,5 +3,7 @@
     "version" : "0.0.0",
     "release" : "1",
     "description" : "whatever",
-    "installedRoot" : false
+    "installedRoot" : false,
+    "installedOn" : "somedate",
+    "reverseDomainName" : "com.example.app"
 }

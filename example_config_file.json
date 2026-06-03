@@ -1,0 +1,6 @@
+
+{
+    "info" : "For an example config, see upstream_deafault in the main aim script",
+    "why not make a seperate file?" : "because otherwise you might forget to create it so it might just be a good idea to have it there",
+    "then why this?" : "as a placeholder, incase I ever want to change it"
+}

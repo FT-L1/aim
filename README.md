@@ -10,3 +10,15 @@ Currently, it can do absolutely nothing. And the source code looks atrocious, so
 
 If anyone finds this interesting, I am very open to contributions, but I have no idea how to accept any at the moment.
 
+
+To do list:
+
+ - find a proper way to store a full package (how about archives?) 
+
+ - CLEAN up this mess of a codebase (how about multiple files with neatly sorted functions?)
+
+ - find a way to actually test this on a remote server that isn't my laptop
+
+ - get or build infrastructure for hosting packages
+
+ - integrate with existing app stores (gnome software, kde discover) or make a custom one
