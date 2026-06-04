@@ -12,12 +12,21 @@ import shutil
 # grabbing the username
 username = os.environ.get("USER")
 
+
+# getting the config
+config = f"/home/{username}/.config/aim.json"
+with open(config, "r") as file:
+    configFileOptions = json.load(file)
+
 # upstream default config. DO NOT MODIFY, write to /usr/share/aim/defaults.json instead
 upstream_default = {
     "coreRepoEnabled" : True,
+    "repos" : 
+    {
+        1 : "https://example.com/"
+    },
     "imagedirDir" : f"/home/{username}/.local/share/aim/Appimages/",
     "imageDirRoot" : "/var/lib/aim/Appimages/",
-    "configPath" : f"/home/{username}/.config/aim.json",
     "configPathRoot" : "/etc/aim.json"
     
 }
@@ -27,7 +36,6 @@ imagedir = f"/home/{username}/.local/share/aim/Appimages/"
 desktopdir = f"/home/{username}/.local/share/applications/"
 icondir = f"/home/{username}/.local/share/icons/hicolor/scalable/apps/"
 infodir = f"/home/{username}/.local/share/aim/info/"
-config = f"/home/{username}/.config/aim.json"
 defaultconfig = "/usr/share/aim/defaults.json"
 defaultexists = os.path.isfile(defaultconfig)
 
@@ -95,7 +103,7 @@ url = "http://192.168.178.46/" # local ip of my laptop
 
 
 
-# set up the arguments for parsing te input
+# set up the arguments for parsing the input
 
 parser = argparse.ArgumentParser(description="AppImage Manager (aim)")
 
